@@ -1,9 +1,14 @@
 <?php
 
-    $DB_host = getenv('IP');
-    $DB_user = getenv('C9_USER');
-    $DB_pass = "";
-    $DB_name = "c9";
+class DbHandler extends SQLite3{
+    private $db;
+
+    function __construct($filename, $flags, $encryption_key)
+    {
+        parent::__construct($filename, $flags, $encryption_key);
+    }
+
+}
     
 try{
     $DB_con = new PDO("mysql:host={$DB_host};dbname={$DB_name}",$DB_user,$DB_pass);
