@@ -1,0 +1,26 @@
+body {
+    font-family:'Roboto', sans-serif;
+    padding-top:50px;
+}
+
+.jumbotron.jumbo-rmit {
+    background-image:url('img/rmit-blur-white.png');
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-color:#DC291E;
+    color:#ffffff;
+    box-shadow:inset 0px -10px 20px -5px rgba(0,0,0,0.2);
+}
+
+a.navbar-brand {
+    width:125px;
+    margin:0px 20px 0px 15px;
+    background-image:url('img/rmit-logo-white.png');
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:100%;
+}
+
+.btn-danger {
+    background-color:#DC291E;
+}
