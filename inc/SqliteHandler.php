@@ -11,6 +11,11 @@ class SqliteHandler extends SQLLitePDO{
     private $handler;
     private $dbName = "identifier.sqlite";
 
+    /**
+     * @param handler SQLLitePDO a new local instance of the sqlite database.
+     *
+     *
+     * */
     function __construct()
     {
         parent::__construct($this->dbName);
@@ -18,10 +23,24 @@ class SqliteHandler extends SQLLitePDO{
 
     }
 
-    function submitTicket(){
+    /**
+     *
+     */
+    function submitTicket($_POST){
+
+        //start transaction try to insert, if not json encode error, if success json
+        //encode success and unique id for user to find ticket later
 
     }
-    function getTicket(){
+
+    /**
+     *
+     */
+    function getTicket($uid){
+
+    }
+
+    function updateTicket($uid, $_POST){
 
     }
 }
