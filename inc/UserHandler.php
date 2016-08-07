@@ -11,6 +11,9 @@ include_once ("SqliteHandler.php");
 if(isset($_POST)){
 
     $pdo = new SqliteHandler();
+
+    if(isset($_POST['name'])){
+    }
     
 
 }

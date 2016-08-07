@@ -28,8 +28,13 @@ class SqliteHandler extends SQLLitePDO{
      */
     function submitTicket($_POST){
 
-        //start transaction try to insert, if not json encode error, if success json
-        //encode success and unique id for user to find ticket later
+        try{
+            //start transaction try to insert, if not json encode error, if success json
+            //encode success and unique id for user to find ticket later
+        }catch(SQLiteException $e){
+            return $e;
+        }
+
 
     }
 
