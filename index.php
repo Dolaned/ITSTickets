@@ -21,7 +21,7 @@
             <h1>Got a problem?</h1>
             <p>We're here for you!</p>
             <p>Our brand new ticketing system allows you to simply and easily discuss your problems with ITS staff so your problem can quickly be resolved.</p>
-            <p><a class="btn btn-danger btn-lg" href="#">Submit a ticket</a></p>
+            <p><a class="btn btn-danger btn-lg" href="create_ticket.php">Submit a ticket</a></p>
         </div>
         <div class="col-md-4 animated fadeIn">
             <h1>Recent FAQs</h1>
@@ -49,3 +49,4 @@
     </div>
 </div>
 <?php require_once('tpl/footer.php'); ?>
+<?php require_once('tpl/end.php'); ?>
