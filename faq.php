@@ -75,3 +75,4 @@
         </div>
     </div>
 <?php require_once('tpl/footer.php'); ?>
+<?php require_once('tpl/end.php'); ?>
