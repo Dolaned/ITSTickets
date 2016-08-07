@@ -26,7 +26,7 @@ class SqliteHandler extends SQLLitePDO{
     /**
      *
      */
-    function submitTicket($_POST){
+    function createTicket($ticket, $user){
 
         try{
             //start transaction try to insert, if not json encode error, if success json
