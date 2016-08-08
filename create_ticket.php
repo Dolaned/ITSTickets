@@ -43,7 +43,7 @@
             submitHandler: function(form) {
                 var formData = $("#ticketform").serialize();
                 $.ajax({
-                    url: "CREATE AJAX FILE LOCATION",
+                    url: "inc/UserHandler.php",
                     dataType: "JSON",
                     method: "POST",
                     data: formData,

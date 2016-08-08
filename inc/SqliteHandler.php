@@ -20,13 +20,14 @@ class SqliteHandler extends SQLLitePDO{
     {
         parent::__construct($this->dbName);
         $this->handler = new SQLLitePDO($this->dbName);
+        $this->handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     }
 
     /**
      *
      */
-    function submitTicket($_POST){
+    function createTicket($ticket, $user){
 
         try{
             //start transaction try to insert, if not json encode error, if success json
