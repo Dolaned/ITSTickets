@@ -10,16 +10,22 @@ include_once ("classes/Class.Ticket.php");
  * Date: 6/08/2016
  * Time: 4:25 PM
  */
-if(isset($_POST)){
+if(isset($_POST)) {
 
     $pdo = new SqliteHandler();
 
     //get post form, generate UID, turn into Ticket object, pass ticket into Ticket object
     // and push to create ticket, return object. parse back to JSON.
-
-    if(isset($_POST['ticketform']));
+    if (isset($_POST['ticketform'])){
         $user = new User();
         $ticket = new Ticket();
 
 
+
+    }
+
+
+
+}else{
+    json_encode(array());
 }

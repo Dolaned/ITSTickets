@@ -20,6 +20,7 @@ class SqliteHandler extends SQLLitePDO{
     {
         parent::__construct($this->dbName);
         $this->handler = new SQLLitePDO($this->dbName);
+        $this->handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     }
 
