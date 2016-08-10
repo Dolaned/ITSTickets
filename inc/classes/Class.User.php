@@ -12,22 +12,19 @@ class User {
     private $userFirstName;
     private $userLastName;
     private $userEmail;
-    private $userContactNumber;
 
     /**
-     * @return mixed
+     * User constructor.
+     * @param $userId
+     * @param $userFirstName
+     * @param $userLastName
+     * @param $userEmail
      */
-    public function getUserContactNumber()
+    public function __construct($userFirstName, $userLastName, $userEmail)
     {
-        return $this->userContactNumber;
-    }
-
-    /**
-     * @param mixed $userContactNumber
-     */
-    public function setUserContactNumber($userContactNumber)
-    {
-        $this->userContactNumber = $userContactNumber;
+        $this->userFirstName = $userFirstName;
+        $this->userLastName = $userLastName;
+        $this->userEmail = $userEmail;
     }
 
     /**
@@ -94,8 +91,4 @@ class User {
         $this->userEmail = $userEmail;
     }
 
-
-    function __construct(){
-
-    }
 }
