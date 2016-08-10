@@ -1,4 +1,46 @@
 <?php require_once('tpl/header.php'); ?>
+<script>
+    $(document).ready(function(){
+        $("#submit").click(submitAjaxForm);
+    });
+
+    function submitAjaxForm(){
+        $("#ticketform").validate({
+            rules: {
+                firstname: 'required',
+                lastname: 'required',
+                studentId: 'required',
+                email: {
+                    required: true,
+                    email: true
+                },
+                phoneNumber: {
+                    minlength: 10,
+                    maxlength: 10
+                },
+                message: {
+                    required: true,
+                    minlength: 20
+                }
+            },
+            submitHandler: function(form) {
+                var formData = $("#ticketform").serialize();
+                $.ajax({
+                    url: "inc/UserHandler.php",
+                    dataType: "JSON",
+                    method: "POST",
+                    data: formData,
+                    success: function(data) {
+                        // form successful (if PHP sends any type of JSON result)
+                    },
+                    error: function() {
+                        // something went wrong trying to submit
+                    }
+                });
+            }
+        });
+    }
+</script>
     <div class="jumbotron jumbo-rmit">
         <div class="container">
             <div class="row">
@@ -50,14 +92,21 @@
                               </div>
                         </div>
                         <div class="form-group">
-                              <label class="control-label col-sm-2" for="comments"><h4>Other Comments:</h4></label>
-                              <div class="col-sm-10">
+                            <label class="control-label col-sm-2" for="comments"><h4>Software Issue:</h4></label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control input-lg" rows="5" id="issue" placeholder="Anything else you would like to tell us about?"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="comments"><h4>Other Comments:</h4></label>
+                            <div class="col-sm-10">
                                 <textarea class="form-control input-lg" rows="5" id="comment" placeholder="Anything else you would like to tell us about?"></textarea>
-                              </div>
+                            </div>
                         </div>
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
-                              <button type="submit" class="btn btn-default btn-lg">Submit</button>
+                              <button type="submit" id="submit" class="btn btn-default btn-lg">Submit</button>
                               <button class="btn btn-danger btn-lg" type="reset">Reset</button>
                           </div>
                         </div>
@@ -67,42 +116,5 @@
         </div>
     </div>
 <?php require_once('tpl/footer.php'); ?>
-<script>
-    $(document).ready(function() {
-        $("#ticketform").validate({
-            rules: {
-                firstname: 'required',
-                lastname: 'required',
-                studentId: 'required',
-                email: {
-                    required: true,
-                    email: true
-                },
-                phoneNumber: {
-                    minlength: 10,
-                    maxlength: 10
-                },
-                message: {
-                    required: true,
-                    minlength: 20
-                }
-            },
-            submitHandler: function(form) {
-                var formData = $("#ticketform").serialize();
-                $.ajax({
-                    url: "inc/UserHandler.php",
-                    dataType: "JSON",
-                    method: "POST",
-                    data: formData,
-                    success: function(data) {
-                        // form successful (if PHP sends any type of JSON result)
-                    },
-                    error: function() {
-                        // something went wrong trying to submit
-                    }
-                });
-            }
-        });
-    });
-</script>
+
 <?php require_once('tpl/end.php'); ?>
