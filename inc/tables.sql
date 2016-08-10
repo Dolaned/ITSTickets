@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS tbl_user_info
 (
-  id INT PRIMARY KEY,
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   firstname VARCHAR(30),
   lastname VARCHAR(30),
   email VARCHAR(50),
@@ -10,11 +10,13 @@ CREATE UNIQUE INDEX tbl_user_info_id_uindex ON tbl_user_info (id);
 
 CREATE TABLE IF NOT EXISTS tbl_tickets
 (
-  ticketid INT PRIMARY KEY NOT NULL,
+  ticketid VARCHAR(10) PRIMARY KEY NOT NULL,
+  subject VARCHAR(50),
   os VARCHAR(300),
   softwareissue VARCHAR(300),
   otherissue VARCHAR(300),
   userid INT,
+  ticketdate DATETIME,
   CONSTRAINT tbl_tickets_tbl_user_info_id_fk FOREIGN KEY (userid) REFERENCES tbl_user_info (id)
 );
 CREATE UNIQUE INDEX tbl_tickets_ticketid_uindex ON tbl_tickets (ticketid);

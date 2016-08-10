@@ -13,14 +13,16 @@ include_once ("classes/Class.Ticket.php");
 if(isset($_POST)) {
 
     $pdo = new SqliteHandler();
+    echo "hello";
 
     //get post form, generate UID, turn into Ticket object, pass ticket into Ticket object
     // and push to create ticket, return object. parse back to JSON.
     if (isset($_POST['ticketform'])){
 
+
         //Create User and ticket objects then pass them by reference to the create ticket function.
         $user = new User($_POST['fname'],$_POST['lname'] ,$_POST['email']);
-        $ticket = new Ticket(time(),$_POST['os'] ,$_POST['issue'] , $_POST['comment']);
+        $ticket = new Ticket($_POST['subject'],time(),$_POST['os'] ,$_POST['issue'] , $_POST['comment']);
         //generate string id to be presented to the user later.
         $ticket->setTicketId($ticket->createUniqueId(10));
 
