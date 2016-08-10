@@ -121,7 +121,7 @@
         });
 
 
-        $('#ticketform input').blur(function()
+        /**$('#ticketform input').blur(function()
         {
             if( !$(this).val() ) {
                 $(this).parent('div').addClass('has-error');
@@ -129,6 +129,6 @@
             else {
                 $(this).parent('div').removeClass('has-error');
             }
-        });
+        });**/
     </script>
 <?php require_once('tpl/end.php'); ?>
