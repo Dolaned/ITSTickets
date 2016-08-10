@@ -6,12 +6,11 @@
 
     <title>ITS Administration - RMIT University</title>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../animate.css">
-
-    <link href="../style.css" rel="stylesheet">
+    <link href="../admin.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -19,21 +18,30 @@
 
 ?>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="../admin/">ITS Administration</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
+
+<header>
+    <div class="container">
+        <a href="#"><div class="rmit-brand">
+            <span></span>
+        </div></a>
+        <nav>
+            <ul class="no-list">
                 <li><a href="../index.php">Back Home</a></li>
             </ul>
-        </div>
+        </nav>
     </div>
-</nav>
+</header>
+
+<div class="container">
+    <div id="sidebar">
+        <ul class="no-list">
+            <li class="active"><a href="#">
+                    <span class="material-icons">search</span>
+                    <span>Search Tickets</span>
+            </a></li>
+            <li><a href="#">
+                    <span class="material-icons">live_help</span>
+                    <span>View Tickets</span>
+                </a></li>
+        </ul>
+    </div>
