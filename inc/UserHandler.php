@@ -17,15 +17,19 @@ if(isset($_POST)) {
     //get post form, generate UID, turn into Ticket object, pass ticket into Ticket object
     // and push to create ticket, return object. parse back to JSON.
     if (isset($_POST['ticketform'])){
-        $user = new User();
-        $ticket = new Ticket();
 
+        //Create User and ticket objects then pass them by reference to the create ticket function.
+        $user = new User($_POST['fname'],$_POST['lname'] ,$_POST['email']);
+        $ticket = new Ticket($user->getUserId(),$_POST[''] ,$_POST[''] , $_POST['']);
+        //generate string id to be presented to the user later.
+        $ticket->setTicketId($ticket->createUniqueId(10));
 
-
+        //push the two objects to PDO
+        $pdo->createTicket($ticket, $user);
     }
 
 
 
 }else{
-    json_encode(array());
+    echo json_encode(array("Type" => "Error", "Message" => "No form has been posted"), JSON_PRETTY_PRINT);
 }

@@ -1,17 +1,29 @@
 <?php
 
-class Ticket {
+class Ticket
+{
     private $TicketId;
+    private $userId;
     private $TicketDate;
     private $operatingSystem;
     private $ticketOtherIssue;
-    private $userId;
 
-    
-    function __construct(){
-
-        
+    /**
+     * Ticket constructor.
+     * @param $userId
+     * @param $TicketDate
+     * @param $operatingSystem
+     * @param $ticketOtherIssue
+     */
+    public function __construct($userId, $TicketDate, $operatingSystem, $ticketOtherIssue)
+    {
+        $this->userId = $userId;
+        $this->TicketDate = $TicketDate;
+        $this->operatingSystem = $operatingSystem;
+        $this->ticketOtherIssue = $ticketOtherIssue;
     }
+
+
 
     /**
      * @return mixed
@@ -92,19 +104,30 @@ class Ticket {
     {
         $this->TicketId = $TicketId;
     }
-    
 
-
-
-
-
-    function createUniqueId(){
-        $this->TicketId = "RANDOM STRING HERE";
-
+    /**
+     * Generate a random string, using a cryptographically secure
+     * pseudorandom number generator (random_int)
+     *
+     * For PHP 7, random_int is a PHP core function
+     * For PHP 5.x, depends on https://github.com/paragonie/random_compat
+     *
+     * @param int $length      How many characters do we want?
+     * @param string $keyspace A string of all possible characters
+     *                         to select from
+     * @return string
+     */
+    function createUniqueId($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    {
+        $str = '';
+        $max = mb_strlen($keyspace, '8bit') - 1;
+        for ($i = 0; $i < $length; ++$i) {
+            $str .= $keyspace[random_int(0, $max)];
+        }
+        return $str;
     }
-    
-    
-    
+
+
 }
 
 

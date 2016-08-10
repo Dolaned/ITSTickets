@@ -27,9 +27,28 @@ class SqliteHandler extends SQLLitePDO{
     /**
      *
      */
-    function createTicket($ticket, $user){
+    function createTicket(Ticket &$ticket, User &$user){
 
         try{
+            $userSql = 'INSERT INTO tbl_user_info (firstname, lastname, email)
+              VALUES (:firstname, :lastname:, :email)';
+            $ticketSql = 'INSERT INTO tbl_tickets (userid, )';
+
+            $stmt = $this->handler->prepare($userSql);
+
+            // Bind parameters to statement variables
+            $stmt->bindParam(':firstname', $user->getUserFirstName());
+            $stmt->bindParam(':lastname', $user->getUserLastName());
+            $stmt->bindParam(':email', $user->getUserEmail());
+
+            //execute the statement
+            $stmt->execute();
+            //grab the inserted user id
+            $ticket->setUserId($this->handler->lastInsertId());
+
+
+
+
             //start transaction try to insert, if not json encode error, if success json
             //encode success and unique id for user to find ticket later
         }catch(SQLiteException $e){
