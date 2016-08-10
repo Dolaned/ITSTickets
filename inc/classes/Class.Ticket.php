@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 class Ticket
 {
     private $TicketId;
@@ -22,24 +23,19 @@ class Ticket
         $this->operatingSystem = $operatingSystem;
         $this->softwareIssue = $softwareIssue;
         $this->ticketOtherIssue = $ticketOtherIssue;
-    }
+=======
+class Ticket {
+    private $TicketId;
+    private $TicketDate;
+    private $operatingSystem;
+    private $ticketOtherIssue;
+    private $userId;
 
-    /**
-     * @return mixed
-     */
-    public function getSoftwareIssue()
-    {
-        return $this->softwareIssue;
-    }
+    
+    function __construct(){
 
-    /**
-     * @param mixed $softwareIssue
-     */
-    public function setSoftwareIssue($softwareIssue)
-    {
-        $this->softwareIssue = $softwareIssue;
+        
     }
-
 
     /**
      * @return mixed
@@ -55,15 +51,110 @@ class Ticket
     public function setUserId($userId)
     {
         $this->userId = $userId;
+>>>>>>> ef9be6e81e16d21d2da34ced6ffb9a03082cc6ab
     }
 
     /**
      * @return mixed
      */
+<<<<<<< HEAD
+    public function getSoftwareIssue()
+    {
+        return $this->softwareIssue;
+    }
+
+    /**
+     * @param mixed $softwareIssue
+     */
+    public function setSoftwareIssue($softwareIssue)
+    {
+        $this->softwareIssue = $softwareIssue;
+    }
+
+=======
     public function getTicketDate()
     {
         return $this->TicketDate;
     }
+
+    /**
+     * @param mixed $TicketDate
+     */
+    public function setTicketDate($TicketDate)
+    {
+        $this->TicketDate = $TicketDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOperatingSystem()
+    {
+        return $this->operatingSystem;
+    }
+
+    /**
+     * @param mixed $operatingSystem
+     */
+    public function setOperatingSystem($operatingSystem)
+    {
+        $this->operatingSystem = $operatingSystem;
+    }
+>>>>>>> ef9be6e81e16d21d2da34ced6ffb9a03082cc6ab
+
+    /**
+     * @return mixed
+     */
+<<<<<<< HEAD
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param mixed $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+=======
+    public function getTicketOtherIssue()
+    {
+        return $this->ticketOtherIssue;
+    }
+
+    /**
+     * @param mixed $ticketOtherIssue
+     */
+    public function setTicketOtherIssue($ticketOtherIssue)
+    {
+        $this->ticketOtherIssue = $ticketOtherIssue;
+>>>>>>> ef9be6e81e16d21d2da34ced6ffb9a03082cc6ab
+    }
+
+    /**
+     * @return mixed
+     */
+<<<<<<< HEAD
+    public function getTicketDate()
+    {
+        return $this->TicketDate;
+    }
+=======
+    public function getTicketId()
+    {
+        return $this->TicketId;
+    }
+
+    /**
+     * @param mixed $TicketId
+     */
+    public function setTicketId($TicketId)
+    {
+        $this->TicketId = $TicketId;
+    }
+    
+>>>>>>> ef9be6e81e16d21d2da34ced6ffb9a03082cc6ab
 
     /**
      * @param mixed $TicketDate
@@ -121,6 +212,7 @@ class Ticket
         $this->TicketId = $TicketId;
     }
 
+<<<<<<< HEAD
     /**
      * Generate a random string, using a cryptographically secure
      * pseudorandom number generator (random_int)
@@ -144,6 +236,15 @@ class Ticket
     }
 
 
+=======
+    function createUniqueId(){
+        $this->TicketId = "RANDOM STRING HERE";
+
+    }
+    
+    
+    
+>>>>>>> ef9be6e81e16d21d2da34ced6ffb9a03082cc6ab
 }
 
 
