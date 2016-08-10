@@ -6,23 +6,39 @@ class Ticket
     private $userId;
     private $TicketDate;
     private $operatingSystem;
+    private $softwareIssue;
     private $ticketOtherIssue;
 
     /**
      * Ticket constructor.
-     * @param $userId
      * @param $TicketDate
      * @param $operatingSystem
+     * @param $softwareIssue
      * @param $ticketOtherIssue
      */
-    public function __construct($userId, $TicketDate, $operatingSystem, $ticketOtherIssue)
+    public function __construct($TicketDate, $operatingSystem, $softwareIssue, $ticketOtherIssue)
     {
-        $this->userId = $userId;
         $this->TicketDate = $TicketDate;
         $this->operatingSystem = $operatingSystem;
+        $this->softwareIssue = $softwareIssue;
         $this->ticketOtherIssue = $ticketOtherIssue;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSoftwareIssue()
+    {
+        return $this->softwareIssue;
+    }
+
+    /**
+     * @param mixed $softwareIssue
+     */
+    public function setSoftwareIssue($softwareIssue)
+    {
+        $this->softwareIssue = $softwareIssue;
+    }
 
 
     /**

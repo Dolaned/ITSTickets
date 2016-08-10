@@ -20,7 +20,7 @@ if(isset($_POST)) {
 
         //Create User and ticket objects then pass them by reference to the create ticket function.
         $user = new User($_POST['fname'],$_POST['lname'] ,$_POST['email']);
-        $ticket = new Ticket($user->getUserId(),$_POST[''] ,$_POST[''] , $_POST['']);
+        $ticket = new Ticket(time(),$_POST[''] ,$_POST[''] , $_POST['']);
         //generate string id to be presented to the user later.
         $ticket->setTicketId($ticket->createUniqueId(10));
 

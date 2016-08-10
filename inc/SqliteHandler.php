@@ -32,7 +32,8 @@ class SqliteHandler extends SQLLitePDO{
         try{
             $userSql = 'INSERT INTO tbl_user_info (firstname, lastname, email)
               VALUES (:firstname, :lastname:, :email)';
-            $ticketSql = 'INSERT INTO tbl_tickets (userid, )';
+            $ticketSql = 'INSERT INTO tbl_tickets (ticketid,userid, os, softwareissue,otherissue, ticketdate)
+              VALUES (:ticketid,:userid, :os, :softwareIssue, :otherissue, :ticketdate)';
 
             $stmt = $this->handler->prepare($userSql);
 
@@ -42,17 +43,37 @@ class SqliteHandler extends SQLLitePDO{
             $stmt->bindParam(':email', $user->getUserEmail());
 
             //execute the statement
-            $stmt->execute();
-            //grab the inserted user id
-            $ticket->setUserId($this->handler->lastInsertId());
+            if($stmt->execute()){
+                //grab the inserted user id
+                $ticket->setUserId($this->handler->lastInsertId());
+
+                //start execution of ticket
+                $stmt2  = $this->handler->prepare($ticketSql);
+
+                $stmt2->bindParam(':userid', $ticket->getUserId());
+                $stmt->bindParam(':ticketid',$ticket->getTicketId());
+                $stmt2->bindParam(':os',$ticket->getOperatingSystem());
+                $stmt2->bindParam(':softwareissue', $ticket->getSoftwareIssue());
+                $stmt2->bindParam(':otherissue', $ticket->getTicketOtherIssue());
+                $stmt2->bindParam('ticketdate',$ticket->getTicketDate());
+
+                if($stmt2->execute()){
+                    echo json_encode(array("Type" => "Success", "Message" => $ticket->getTicketId()), JSON_PRETTY_PRINT);
+                }
+
+            }
 
 
+
+            return true;
 
 
             //start transaction try to insert, if not json encode error, if success json
             //encode success and unique id for user to find ticket later
         }catch(SQLiteException $e){
-            return $e;
+
+            echo $e;
+            return false;
         }
 
 
