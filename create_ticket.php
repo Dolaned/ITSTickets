@@ -53,7 +53,7 @@
                               </div>
                         </div>
                         <div class="form-group">
-                              <label class="control-label col-sm-2" for="comments"><h4>Comments:</h4></label>
+                              <label class="control-label col-sm-2" for="comments"><h4>Other Issues:</h4></label>
                               <div class="col-sm-10">
                                 <textarea class="form-control input-lg" rows="5" id="comment" placeholder="Anything else you would like to tell us about?" name="comments"></textarea>
                               </div>
