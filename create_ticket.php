@@ -18,44 +18,41 @@
             <div class="panel-body">
                 <div class="row center-block">
                     <form class="form-horizontal" role="form" action="" id="ticketform">
-                        <div class="form-group">
+                        <div class="form-group has-danger">
                               <label class="control-label col-sm-2" for="subject"><h4>Subject:</h4></label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-danger input-lg" id="subject" placeholder="I'm having difficulties.." name="subject">
+                                <input type="text" class="form-control form-control-danger input-lg" id="subject" placeholder="I'm having difficulties..">
+                              </div>
+                              <div class="form-control-feedback">You cannot leave this field empty</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="fname"><h4>First Name:</h4></label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control input-lg" id="fname" placeholder="Scooby">
                               </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="firstname"><h4>First Name:</h4></label>
+                            <label class="control-label col-sm-2" for="lname"><h4>Last Name:</h4></label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control input-lg" id="firstname" placeholder="Scooby" name="firstname">
-                              </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="lastname"><h4>Last Name:</h4></label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control input-lg" id="lastname" placeholder="Dooby-Doo" name="lastname">
+                                <input type="text" class="form-control input-lg" id="lname" placeholder="Dooby-Doo">
                               </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email"><h4>Email:</h4></label>
                               <div class="col-sm-10">
-                                <input type="email" class="form-control input-lg" id="email" placeholder="scoobydoo@gmail.com" name="email">
+                                <input type="email" class="form-control input-lg" id="email" placeholder="scoobydoo@gmail.com">
                               </div>
                         </div>
                         <div class="form-group">
                               <label class="control-label col-sm-2" for="os"><h4>Operating System (OS):</h4></label>
                               <div class="col-sm-10">
-                                  <select class="form-control input-lg" id="os" name="os">
-                                    <option>Windows</option>
-                                    <option>Linux</option>
-                                    <option>Mac OS</option>
-                                  </select>
+                                <input type="text" class="form-control input-lg" id="os" placeholder="Windows/Linux/Mac">
                               </div>
                         </div>
                         <div class="form-group">
-                              <label class="control-label col-sm-2" for="comments"><h4>Other Issues:</h4></label>
+                              <label class="control-label col-sm-2" for="comments"><h4>Other Comments:</h4></label>
                               <div class="col-sm-10">
-                                <textarea class="form-control input-lg" rows="5" id="comment" placeholder="Anything else you would like to tell us about?" name="comments"></textarea>
+                                <textarea class="form-control input-lg" rows="5" id="comment" placeholder="Anything else you would like to tell us about?"></textarea>
                               </div>
                         </div>
                         <div class="form-group">
@@ -76,25 +73,19 @@
             rules: {
                 firstname: 'required',
                 lastname: 'required',
-                subject: 'required',
+                studentId: 'required',
                 email: {
                     required: true,
                     email: true
                 },
-                comment: {
+                phoneNumber: {
+                    minlength: 10,
+                    maxlength: 10
+                },
+                message: {
+                    required: true,
                     minlength: 20
                 }
-            },
-            messages: {
-                firstname: {
-                    required: "Please enter your first name"    
-                },
-                lastname: {
-                    required: "Please enter your last name"    
-                }, 
-                subject: {
-                    required: "Please provide a subject"    
-                } 
             },
             submitHandler: function(form) {
                 var formData = $("#ticketform").serialize();
@@ -113,16 +104,5 @@
             }
         });
     });
-    
-    
-    $('#ticketform input').blur(function()
-    {
-        if( !$(this).val() ) {
-              $(this).parent('div').addClass('has-error');
-        }
-        else {
-            $(this).parent('div').removeClass('has-error');
-        }
-    });  
 </script>
 <?php require_once('tpl/end.php'); ?>
