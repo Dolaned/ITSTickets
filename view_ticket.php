@@ -3,12 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>My Tickets</h2>
-                <h1>Subject: Password Reset</h1>
-                <p>
-                    Hi ITS. I am having problems! I can't log into my RMIT account and I have no idea why :-(
-                    <br/>Could I please have my password reset?
-                </p>
+                <h1>My Tickets</h1>
             </div>
         </div>
     </div>
@@ -17,6 +12,23 @@
 <div class="container tickets">
     <div class="row">
         <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-9">
+                    <div class="panel panel-info reply-right">
+                        <div class="panel-heading">
+                            Subject: Password Reset
+                        </div>
+                        <div class="panel-body">
+                            Hi ITS. I am having problems! I can't log into my RMIT account and I have no idea why :-(
+                            <br/>Could I please have my password reset?
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="profile"style="background-image:url(img/profile.jpg);"></div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-9">
@@ -74,7 +86,13 @@
                             <b>Reply to this conversation</b>
                         </div>
                         <div class="panel-body">
-                            <textarea placeholder="Type a reply here..." class="form-control"></textarea>
+                            <form id="sendMessage">
+                                <textarea placeholder="Type a reply here..." class="form-control"></textarea>
+                                <hr/>
+                                <p>
+                                    <input type="submit" class="pull-right btn btn-primary" value="Send Message" />
+                                </p>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -109,6 +127,8 @@
 </div>
 <?php require_once('tpl/footer.php'); ?>
 <script>
+    $(document).ready(function() {
 
+    });
 </script>
 <?php require_once('tpl/end.php'); ?>

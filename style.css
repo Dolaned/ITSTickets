@@ -70,3 +70,10 @@ a.navbar-brand {
     box-shadow:none;
     min-height:150px;
 }
+
+
+@media screen and (max-width: 991px) {
+    .container.tickets .profile {
+        display:none;
+    }
+}

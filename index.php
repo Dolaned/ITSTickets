@@ -43,8 +43,14 @@
             <p><a class="btn btn-danger" href="#">View More...</a></p>
         </div>
         <div class="col-md-4 animated fadeInRight">
-            <h1>My Tickets</h1>
-            <p>You have no tickets.</p>
+            <h1>Ticket Search</h1>
+            <form id="ticketSearch">
+                <input type="email" name="email" class="form-control" placeholder="Search by: Email Address" />
+                <input type="text" name="studentid" class="form-control" placeholder="Search by: Student ID" /><hr/>
+                <p>
+                    <input type="submit" value="Search" class="btn btn-primary pull-right" />
+                </p>
+            </form>
         </div>
     </div>
 </div>
