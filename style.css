@@ -28,3 +28,52 @@ a.navbar-brand {
 .btn-danger {
     background-color:#DC291E;
 }
+
+.profile {
+    width:75px;
+    height:75px;
+    border-radius:50px;
+    background-color:white;
+    border:1px solid rgba(0,0,0,0.5);
+    background-repeat:no-repeat;
+    background-size:100%;
+    background-position:center;
+    margin:0 auto;
+}
+
+.reply-right:before {
+    content:"";
+    position:absolute;
+    right:6px;
+    margin-top:10px;
+    width:0px;
+    height:0px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #d9edf7;
+}
+
+.reply-left:before {
+    content:"";
+    position:absolute;
+    left:6px;
+    margin-top:10px;
+    width:0px;
+    height:0px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #dff0d8;
+}
+
+.container.tickets textarea {
+    border:none;
+    box-shadow:none;
+    min-height:150px;
+}
+
+
+@media screen and (max-width: 991px) {
+    .container.tickets .profile {
+        display:none;
+    }
+}
