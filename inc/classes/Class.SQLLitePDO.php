@@ -5,7 +5,7 @@ class SQLLitePDO extends PDO{
 
     function __construct($filename) {
         $filename = realpath($filename);
-        parent::__construct('sqlite:' . $filename);
+        parent::__construct($filename);
 
         $key = ftok($filename, 'a');
         $this->sem = sem_get($key);
