@@ -161,7 +161,6 @@ class Ticket
         return $str;
     }
 
+    
 
 }
-
-

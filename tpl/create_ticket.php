@@ -1,0 +1,135 @@
+<?php require_once('tpl/header.php'); ?>
+    <div class="jumbotron jumbo-rmit">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Create Ticket</h1>
+                    <p>
+                        All tickets are actively monitored and any spam may lead to a suspension in using ITS services.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center"><h3>Fill out the form below and a representative will contact you soon</h3></div>
+            <div class="panel-body">
+                <div class="row center-block">
+                    <form class="form-horizontal" role="form" id="ticketform">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="subject"><h4>Subject:</h4></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-danger input-lg" id="subject" placeholder="I'm having difficulties.." name="subject">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="firstname"><h4>First Name:</h4></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-lg" id="firstname" placeholder="Scooby" name="firstname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="lastname"><h4>Last Name:</h4></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-lg" id="lastname" placeholder="Dooby-Doo" name="lastname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email"><h4>Email:</h4></label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control input-lg" id="email" placeholder="scoobydoo@gmail.com" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="os"><h4>Operating System (OS):</h4></label>
+                            <div class="col-sm-10">
+                                <select class="form-control input-lg" id="os" name="os">
+                                    <option>Windows</option>
+                                    <option>Linux</option>
+                                    <option>Mac OS</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="comments"><h4>Software Issue:</h4></label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control input-lg" rows="5" id="softwareissue" placeholder="What is your issue??" name="comments"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="comments"><h4>Other Issues:</h4></label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control input-lg" rows="5" id="comment" placeholder="Anything else you would like to tell us about?" name="comments"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default btn-lg">Submit</button>
+                                <button class="btn btn-danger btn-lg" type="reset">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php require_once('tpl/footer.php'); ?>
+<script>
+    $(document).ready(function() {
+
+        $("#ticketform").validate({
+            rules: {
+                firstname: 'required',
+                lastname: 'required',
+                subject: 'required',
+                email: {
+                    required: true,
+                    email: true
+                },
+                comment: {
+                    minlength: 20
+                }
+            },
+            messages: {
+                firstname: {
+                    required: "Please enter your first name"
+                },
+                lastname: {
+                    required: "Please enter your last name"
+                },
+                subject: {
+                    required: "Please provide a subject"
+                }
+            },
+            submitHandler: function (form, event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "inc/UserHandler.php",
+                    method: "POST",
+                    data: form,
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function () {
+                        alert(data)
+                    }
+                });
+            }
+        })
+        });
+    
+    
+    $('#ticketform input').blur(function()
+    {
+        if( !$(this).val() ) {
+              $(this).parent('div').addClass('has-error');
+        }
+        else {
+            $(this).parent('div').removeClass('has-error');
+        }
+    });  
+</script>
+<?php require_once('tpl/end.php'); ?>
+<?php require_once('tpl/end.php'); ?>
