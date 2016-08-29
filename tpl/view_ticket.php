@@ -1,4 +1,3 @@
-<?php require_once('tpl/header.php'); ?>
 <div class="jumbotron jumbo-rmit">
     <div class="container">
         <div class="row">
@@ -26,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="profile"style="background-image:url(img/profile.jpg);"></div>
+                    <div class="profile"style="background-image:url(../img/profile.jpg);"></div>
                 </div>
             </div>
             <div class="row">
@@ -42,12 +41,12 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="profile"style="background-image:url(img/profile.jpg);"></div>
+                    <div class="profile"style="background-image:url(../img/profile.jpg);"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    <div class="profile" style="background-image:url(img/rmit-red.jpg);"></div>
+                    <div class="profile" style="background-image:url(../img/rmit-red.jpg);"></div>
                 </div>
                 <div class="col-md-9">
                     <div class="panel panel-success reply-left">
@@ -63,7 +62,7 @@
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    <div class="profile" style="background-image:url(img/rmit-red.jpg);"></div>
+                    <div class="profile" style="background-image:url(../img/rmit-red.jpg);"></div>
                 </div>
                 <div class="col-md-9">
                     <div class="panel panel-success reply-left">
@@ -97,7 +96,7 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="profile"style="background-image:url(img/profile.jpg);"></div>
+                    <div class="profile"style="background-image:url(../img/profile.jpg);"></div>
                 </div>
             </div>
         </div>
@@ -126,9 +125,3 @@
     </div>
 </div>
 <?php require_once('tpl/footer.php'); ?>
-<script>
-    $(document).ready(function() {
-
-    });
-</script>
-<?php require_once('tpl/end.php'); ?>

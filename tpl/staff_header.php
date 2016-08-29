@@ -1,3 +1,10 @@
+<?php
+$page = 'home';
+if(isset($_GET['page'])) {
+    $page = $_GET['page'];
+}
+?>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -14,34 +21,30 @@
 </head>
 
 <body>
-<?php
-
-?>
-
 
 <header>
     <div class="container">
-        <a href="#"><div class="rmit-brand">
+        <a href="../admin/"><div class="rmit-brand">
             <span></span>
         </div></a>
-        <nav>
-            <ul class="no-list">
-                <li><a href="../index.php">Back Home</a></li>
-            </ul>
-        </nav>
+        <div class="section-title"><h1></h1></div>
     </div>
 </header>
 
 <div class="container">
     <div id="sidebar">
         <ul class="no-list">
-            <li class="active"><a href="#">
+            <li><a href="../index.php">
+                <span class="material-icons">arrow_back</span>
+                <span>Back Home</span>
+            </a></li>
+            <li class="<?php echo ($page == 'search') ? "active" : "" ?>"><a href="?page=search">
                     <span class="material-icons">search</span>
                     <span>Search Tickets</span>
             </a></li>
-            <li><a href="#">
+            <li class="<?php echo ($page == 'view') ? "active" : "" ?>"><a href="?page=view">
                     <span class="material-icons">live_help</span>
                     <span>View Tickets</span>
-                </a></li>
+            </a></li>
         </ul>
     </div>
