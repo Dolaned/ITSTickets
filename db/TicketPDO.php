@@ -1,7 +1,7 @@
 <?php
 
 
-include('Ticket.php');
+require_once "../inc/classes/Class.Ticket.php";
 
 class TicketPDO
 {
@@ -24,7 +24,7 @@ class TicketPDO
     protected function __construct() {
         try {
 			// Create (connect to) SQLite database in file
-            $this->db = new PDO('sqlite:tickets.sqlite3');
+            $this->db = new PDO('sqlite:../db/tickets.sqlite3');
             // Set errormode to exceptions
             $this->db->setAttribute(PDO::ATTR_ERRMODE,
                 PDO::ERRMODE_EXCEPTION);
@@ -40,6 +40,7 @@ class TicketPDO
 			// Create table messages
             $this->db->exec("CREATE TABLE IF NOT EXISTS tickets (
                     id INTEGER PRIMARY KEY,
+                    ticketid TEXT,
 					subject TEXT,
                     firstName TEXT,
                     lastName TEXT,
@@ -47,7 +48,8 @@ class TicketPDO
                     operatingSystem TEXT,
                     softwareIssue TEXT,
                     comments TEXT,
-					status TEXT)");
+					status TEXT,
+					`date` TEXT)");
         } catch(PDOException $e) {
                 // Print PDOException message
                 echo $e->getMessage();
@@ -57,16 +59,19 @@ class TicketPDO
     public function insertData(Ticket $ticket) {
         try {
             // Prepare INSERT statement to SQLite3 file db
-            $insert = "INSERT INTO tickets (subject, firstName, lastName, email, operatingSystem, softwareIssue, comments, status)
-                VALUES (:subject, :firstName, :lastName, :email, :operatingSystem, :softwareIssue, :comments, :status)";
-			$subject= $ticket->getSubject();
-			$firstName= $ticket->getFirstName();
-            $lastName = $ticket->getLastName();
+            $insert = "INSERT INTO tickets (subject, firstName, lastName, email, operatingSystem, softwareIssue, comments, status, ticketid, `date`)
+                VALUES (:subject, :firstName, :lastName, :email, :operatingSystem, :softwareIssue, :comments, :status, :ticketid, :date)";
+			$subject= $ticket->getTicketSubject();
+			$firstName= $ticket->getFirstname();
+            $lastName = $ticket->getLastname();
             $email = $ticket->getEmail();
-            $operatingSystem = $ticket->getOS();
+            $operatingSystem = $ticket->getOperatingSystem();
             $softwareIssue= $ticket->getSoftwareIssue();
-            $comments= $ticket->getComments();
+            $comments= $ticket->getTicketOtherIssue();
             $status= $ticket->getStatus();
+            $ticketid = $ticket->getTicketId();
+            $date = $ticket->getTicketDate();
+
             $sql = $this->db->prepare($insert);
             $sql->bindParam(':subject', $subject);
             $sql->bindParam(':firstName', $firstName);
@@ -76,6 +81,8 @@ class TicketPDO
             $sql->bindParam(':softwareIssue', $softwareIssue);
             $sql->bindParam(':comments', $comments);
             $sql->bindParam(':status', $status);
+            $sql->bindParam(':ticketid', $ticketid);
+            $sql->bindParam(':date', $date);
             $sql->execute();
         } catch(PDOException $e) {
             // Print PDOException message
@@ -83,15 +90,20 @@ class TicketPDO
         }
     }
 
-    public function getData()
+    public static function getData($tid)
     {
+        $instance = self::getInstance();
         try {
-            // Prepare INSERT statement to SQLite3 file db
-            $result = $this->db->query('SELECT * FROM tickets');
+            $find = "SELECT * FROM tickets WHERE ticketid = :ticketid LIMIT 1";
+            $sql = $instance->db->prepare($find);
+            $sql->bindParam(':ticketid', $tid, PDO::PARAM_STR);
+            $sql->execute();
+
+            $result = $sql->fetch(PDO::FETCH_ASSOC);
             return $result;
         } catch (PDOException $e) {
             // Print PDOException message
-            echo $e->getMessage();
+            return $e->getMessage();
         }
     }
 
