@@ -107,5 +107,24 @@ class TicketPDO
         }
     }
 
+    public static function getDataEmail($temail)
+    {
+        $instance = self::getInstance();
+        try
+        {
+            $find = "SELECT * FROM tickets WHERE email = :emailadd";
+            $sql = $instance->db->prepare($find);
+            $sql->bindParam(':emailadd', $temail, PDO::FETCH_ASSOC);
+            $sql->execute();
+
+            $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        }
+        catch (PDOException $e)
+        {
+            return $e->getMessage();
+        }
+    }
+
 
 }
