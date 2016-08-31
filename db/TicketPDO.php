@@ -107,14 +107,17 @@ class TicketPDO
         }
     }
 
-    public static function getDataEmail($temail)
+    public static function getDataEmail($temail, $orderby, $ascdesc)
     {
+        $ascdesc = ($ascdesc == true) ? "ASC" : "DESC";
+
         $instance = self::getInstance();
         try
         {
-            $find = "SELECT * FROM tickets WHERE email = :emailadd";
+            $find = "SELECT * FROM tickets WHERE email = :emailadd ORDER BY :orderBy ".$ascdesc;
             $sql = $instance->db->prepare($find);
             $sql->bindParam(':emailadd', $temail, PDO::PARAM_STR);
+            $sql->bindParam(':orderBy', $orderby, PDO::PARAM_STR);
             $sql->execute();
 
             $results = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -180,6 +183,8 @@ class TicketPDO
 
 
     }
+
+
 
 
 

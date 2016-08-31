@@ -12,6 +12,8 @@ if($_POST)
 {
     $id = $_POST['id'];
     $email = $_POST['email'];
+    $orderby = $_POST['orderBy'];
+    $ascdesc = $_POST['ascdesc'];
     if(strlen($id) >= 1)
     {
         $data = TicketPDO::getData($id);
@@ -20,7 +22,7 @@ if($_POST)
     }
     elseif (strlen($id) >= 1)
     {
-        $data2 = TicketPDO::getDataEmail($email);
+        $data2 = TicketPDO::getDataEmail($email, $orderby, $ascdesc);
         echo json_encode($data2);
         exit;
     }
