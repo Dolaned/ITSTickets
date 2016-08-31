@@ -24,54 +24,7 @@
                     <div class="profile" style="background-image:url(../img/profile.png);"></div>
                 </div>
             </div>
-            <!--<div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-9">
-                    <div class="panel panel-info reply-right">
-                        <div class="panel-heading">
-                            Nicholas Zuccarelli
-                        </div>
-                        <div class="panel-body">
-                            I would also like to mention that this is on a friend's account of mine.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="profile"style="background-image:url(../img/profile.jpg);"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="profile" style="background-image:url(../img/rmit-red.jpg);"></div>
-                </div>
-                <div class="col-md-9">
-                    <div class="panel panel-success reply-left">
-                        <div class="panel-heading">
-                            Bob Smith
-                        </div>
-                        <div class="panel-body">
-                            Hi Nick! Give us a second and we will send you a link that will allow you to securely reset your password.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="profile" style="background-image:url(../img/rmit-red.jpg);"></div>
-                </div>
-                <div class="col-md-9">
-                    <div class="panel panel-success reply-left">
-                        <div class="panel-heading">
-                            Bob Smith
-                        </div>
-                        <div class="panel-body">
-                            Thanks for holding Nick. Here is your password reset link: <a href="http://google.com">http://google.com</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>-->
+            <div id="appender"></div>
             <hr/>
             <div class="row">
                 <div class="col-md-1"></div>
@@ -82,7 +35,7 @@
                         </div>
                         <div class="panel-body">
                             <form id="sendMessage">
-                                <textarea placeholder="Type a reply here..." class="form-control"></textarea>
+                                <textarea style="max-width:100%;" placeholder="Type a reply here..." class="form-control" id="commentTxt" name="commentTxt"></textarea>
                                 <hr/>
                                 <p>
                                     <input type="submit" class="pull-right btn btn-primary" value="Send Message" />
@@ -117,12 +70,15 @@
 <script>
     $(document).ready(function()
     {
+        var ticket;
+
         function formatTimestamp(timestamp) {
             var date = moment(timestamp).format("Do MMMM YYYY, h:mmA");
             return date;
         }
 
         function loadError() {
+            ticket = [];
             $('.container.tickets > .row.error').delay(250).fadeIn(250);
             $('.container.tickets > .row.discussion').fadeOut(250);
         }
@@ -142,6 +98,7 @@
                             loadError();
                         }
                         else {
+                            ticket = data;
                             $('.container.tickets > .row.error').fadeOut(250);
                             $('.container.tickets > .row.discussion').delay(250).fadeIn(250);
 
@@ -159,9 +116,39 @@
                             else if(data['status'] == "resolved") {
                                 $("#ticketStatus").html('<div class="alert alert-success">This issue has been resolved.</div>');
                             }
-                            else if(data['status'] == "closed") {
-                                $("#ticketStatus").html('<div class="alert alert-danger">This issue was not resolved but has been closed.</div>');
+                            else if(data['status'] == "unresolved") {
+                                $("#ticketStatus").html('<div class="alert alert-danger">This issue was set as unresolved.</div>');
                             }
+                            else if(data['status'] == "inprogress") {
+                                $("#ticketStatus").html('<div class="alert alert-info">This issue is in progress of being resolved.</div>');
+                            }
+
+                            $.ajax({
+                                type : 'POST',
+                                dataType : 'JSON',
+                                url : 'ajax/view_ticket_load_comments.php',
+                                data : {id : hash},
+                                success : function(data) {
+                                    if(data != "error") {
+                                        for(var d in data) {
+                                            var d = data[d];
+                                            if(Object.keys(d).length != 5) {
+                                                continue;
+                                            }
+
+                                            var str = "";
+                                            if(d['type'] == "student") {
+                                                str += '<div class="row"><div class="col-md-1"></div><div class="col-md-9"><div class="panel panel-info reply-right"><div class="panel-heading">'+d['name']+'</div><div class="panel-body">'+d['comments']+'</div></div></div><div class="col-md-2"><div class="profile" style="background-image:url(../img/profile.png);"></div></div></div>';
+                                            }
+                                            else {
+                                                str += '<div class="row"><div class="col-md-2"><div class="profile" style="background-image:url(../img/rmit-red.jpg);"></div></div><div class="col-md-9"><div class="panel panel-success reply-left"><div class="panel-heading">'+d['name']+'</div><div class="panel-body">'+d['comments']+'</div></div></div><div class="col-md-1"></div></div>';
+                                            }
+
+                                            $('#appender').append(str);
+                                        }
+                                    }
+                                }
+                            });
                         }
                     }
                     else {
@@ -169,6 +156,9 @@
                         // uncomment the block below this
                         loadError();
                     }
+                },
+                error : function() {
+                    loadError();
                 }
             });
         }
@@ -182,6 +172,46 @@
 
         $(window).on("hashchange", function() {
             performHash();
-        })
+        });
+
+        $("#sendMessage").validate({
+            rules: {
+                commentTxt: {
+                    required: true,
+                    minlength: 5
+                }
+            }
+        });
+
+        $(document).on('submit', '#sendMessage', function(e)
+        {
+            e.preventDefault();
+            if(ticket == null || Object.keys(ticket).length < 1) {
+                return false;
+            }
+
+            var data = {
+                id: ticket['ticketid'],
+                name: ticket['firstName'] + ' ' + ticket['lastName'],
+                text: $("#commentTxt").val()
+            };
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'JSON',
+                url : 'ajax/view_ticket_create_comment.php',
+                data : data,
+                success : function(data) {
+                    if(data == "success") {
+                        location.reload();
+                    }
+                    else {
+                        alert("An error occurred. Please try again.");
+                    }
+                }
+            });
+
+            return false;
+        });
     });
 </script>
