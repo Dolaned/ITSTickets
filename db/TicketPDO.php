@@ -149,20 +149,39 @@ class TicketPDO
     public static function deleteTicket($tid)
     {
         $instance = self::getInstance();
-        try
-        {
+        try {
             $find = "DELETE FROM tickets WHERE ticketid = :ticketID";
             $sql = $instance->db->prepare($find);
-            $sql->bindparam(':ticketID', $tid, PDO::PARAM_STR);
+            $sql->bindParam(':ticketID', $tid, PDO::PARAM_STR);
+            $sql->execute();
+            return "";
+        } catch (PDOException $e) {
+            // Print PDOException message
+            return $e->getMessage();
+        }
+    }
+
+    public static function changeStatus($tid, $status)
+    {
+        $instance = self::getInstance();
+        try
+        {
+            $find = "UPDATE tickets SET status= :currStatus WHERE ticketid = :ticketID";
+            $sql = $instance->db->prepare($find);
+            $sql->bindParam(':ticketID', $tid, PDO::PARAM_STR);
+            $sql->bindParam(':currStatus', $status, PDO::PARAM_STR);
             $sql->execute();
             return "";
         }
         catch (PDOException $e) {
-        // Print PDOException message
+            // Print PDOException message
             return $e->getMessage();
         }
 
+
     }
+
+
 
 }
 
