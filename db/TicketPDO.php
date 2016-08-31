@@ -146,5 +146,23 @@ class TicketPDO
         }
     }
 
+    public static function deleteTicket($tid)
+    {
+        $instance = self::getInstance();
+        try
+        {
+            $find = "DELETE FROM tickets WHERE ticketid = :ticketID";
+            $sql = $instance->db->prepare($find);
+            $sql->bindparam(':ticketID', $tid, PDO::PARAM_STR);
+            $sql->execute();
+            return "";
+        }
+        catch (PDOException $e) {
+        // Print PDOException message
+            return $e->getMessage();
+        }
+
+    }
+
 }
 
