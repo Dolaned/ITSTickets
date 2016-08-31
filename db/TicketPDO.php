@@ -114,7 +114,7 @@ class TicketPDO
         {
             $find = "SELECT * FROM tickets WHERE email = :emailadd";
             $sql = $instance->db->prepare($find);
-            $sql->bindParam(':emailadd', $temail, PDO::FETCH_ASSOC);
+            $sql->bindParam(':emailadd', $temail, PDO::PARAM_STR);
             $sql->execute();
 
             $results = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -126,5 +126,25 @@ class TicketPDO
         }
     }
 
+    /**
+     *
+     */
+    public static function getAllTickets()
+    {
+        $instance = self::getInstance();
+        try{
+            $find = "SELECT * FROM tickets";
+            $sql = $instance->db->prepare($find);
+            $sql->execute();
+
+            $allTickets = $sql->fetchAll(PDO::FETCH_ASSOC);
+            return $allTickets;
+        }
+        catch (PDOException $e)
+        {
+            return $e->getMessage();
+        }
+    }
 
 }
+
