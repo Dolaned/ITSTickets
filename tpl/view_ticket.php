@@ -85,6 +85,7 @@
 
         /* Load data from ID */
         function performHash() {
+            $("#appender").html("");
             var hash = window.location.hash.substring(1);
             $.ajax({
                 type : 'POST',

@@ -64,7 +64,7 @@ class Ticket
     }
 
     public function setStatus($status) {
-        if($status != "pending" || $status != "resolved" || $status != "closed") {
+        if($status != "pending" || $status != "resolved" || $status != "unresolved" || $status != "inprogress") {
             $status = "pending";
         }
         $this->ticketStatus = $status;
