@@ -10,9 +10,18 @@ if($_POST)
 {
     $ID = $_POST['id'];
     $STATUS = $_POST['status'];
-    TicketPDO::changeStatus($ID, $STATUS);
-    echo json_encode("SUCCESS");
-    exit;
+    if($STATUS=="resolved" || $STATUS=="unresolved" || $STATUS=="pending" || $STATUS=="inprogress")
+    {
+        TicketPDO::changeStatus($ID, $STATUS);
+        echo json_encode("success");
+        exit;
+    }
+    else
+    {
+        echo json_encode("error");
+        exit;
+    }
+
 }
 else
 {

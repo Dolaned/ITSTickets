@@ -10,7 +10,7 @@ require_once "../db/TicketPDO.php";
     {
         $ID = $_POST['id'];
         TicketPDO::deleteTicket($ID);
-        echo json_encode("SUCCESS");
+        echo json_encode("success");
         exit;
     }
     else
