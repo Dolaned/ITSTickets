@@ -39,6 +39,7 @@ if(isset($_GET['page'])) {
             <ul class="nav navbar-nav">
                 <li class="<?php echo ($page == 'home') ? "active" : "" ?>"><a href="?page=home">Home</a></li>
                 <li class="<?php echo ($page == 'faq') ? "active" : "" ?>"><a href="?page=faq">FAQ</a></li>
+                <li><a href="/admin/">Admin</a></li>
             </ul>
         </div>
     </div>
