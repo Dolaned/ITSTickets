@@ -20,7 +20,7 @@ if($_POST)
         echo json_encode($data);
         exit;
     }
-    elseif (strlen($id) >= 1)
+    elseif (strlen($email) >= 1)
     {
         $data2 = TicketPDO::getDataEmail($email, $orderby, $ascdesc);
         echo json_encode($data2);

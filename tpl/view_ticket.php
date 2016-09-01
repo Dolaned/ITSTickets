@@ -9,7 +9,7 @@
 </div>
 
 <div class="container tickets">
-    <div class="row error" style="display:none;"><div class="alert alert-danger">An error occurred. Please try again!</div></div>
+    <div class="row error" style="display:none;"><div class="alert alert-danger">An error occurred. Please try again!<p>The ticket ID you entered may not exist.</p></div></div>
     <div class="row discussion">
         <div class="col-md-8">
             <div class="row">
@@ -57,6 +57,7 @@
                     Ticket Details
                 </div>
                 <div class="panel-body">
+                    <p><b>Ticket ID:</b> <span id="ticketID"></span></p>
                     <p><b>Name:</b> <span id="ticketUsername"></span></p>
                     <p><b>Email:</b> <span id="ticketEmail"></span></p>
                     <p><b>Ticket Date:</b> <span id="ticketTime"></span></p>
@@ -110,6 +111,7 @@
                             $("#ticketEmail").text(data['email']);
                             $("#ticketTime").text(formatTimestamp(data['date'] * 1000));
                             $("#ticketOS").text(data['operatingSystem']);
+                            $("#ticketID").text(data['ticketid']);
 
                             if(data['status'] == "pending") {
                                 $("#ticketStatus").html('<div class="alert alert-warning">This issue has not yet been resolved.</div>');
