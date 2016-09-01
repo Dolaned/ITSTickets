@@ -1,3 +1,11 @@
+<?php
+$page = 'home';
+if(isset($_GET['page'])) {
+    $page = $_GET['page'];
+}
+?>
+
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -15,9 +23,6 @@
 </head>
 
 <body>
-<?php
-
-?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -28,12 +33,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php"></a>
+            <a class="navbar-brand rmit-brand" href="?page=home"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="faq.php">FAQ</a></li>
+                <li class="<?php echo ($page == 'home') ? "active" : "" ?>"><a href="?page=home">Home</a></li>
+                <li class="<?php echo ($page == 'faq') ? "active" : "" ?>"><a href="?page=faq">FAQ</a></li>
+                <li><a href="admin/">Admin</a></li>
             </ul>
         </div>
     </div>

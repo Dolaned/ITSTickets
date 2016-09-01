@@ -3,12 +3,15 @@
 class Ticket
 {
     private $TicketId;
-    private $userId;
     private $TicketDate;
     private $operatingSystem;
     private $softwareIssue;
     private $ticketOtherIssue;
     private $ticketSubject;
+    private $ticketFirstname;
+    private $ticketLastname;
+    private $ticketEmail;
+    private $ticketStatus;
 
     /**
      * Ticket constructor.
@@ -17,13 +20,19 @@ class Ticket
      * @param $softwareIssue
      * @param $ticketOtherIssue
      */
-    public function __construct($ticketSubject, $TicketDate, $operatingSystem, $softwareIssue, $ticketOtherIssue)
-    {
-        $this->ticketSubject = $ticketSubject;
-        $this->TicketDate = $TicketDate;
-        $this->operatingSystem = $operatingSystem;
-        $this->softwareIssue = $softwareIssue;
-        $this->ticketOtherIssue = $ticketOtherIssue;
+
+    public function __construct($subject, $firstName, $lastName, $email, $operatingSystem, $softwareIssue, $comments, $status) {
+        $this->setStatus($status);
+        $this->setEmail($email);
+        $this->setLastname($lastName);
+        $this->setFirstname($firstName);
+        $this->setTicketOtherIssue($comments);
+        $this->setSoftwareIssue($softwareIssue);
+        $this->setOperatingSystem($operatingSystem);
+        $this->setTicketSubject($subject);
+
+        $this->setTicketDate(time());
+        $this->setTicketId($this->createUniqueId(16));
     }
 
     /**
@@ -40,6 +49,25 @@ class Ticket
     public function setSoftwareIssue($softwareIssue)
     {
         $this->softwareIssue = $softwareIssue;
+    }
+
+    public function setEmail($email) {
+        $this->ticketEmail = $email;
+    }
+
+    public function setFirstname($firstname) {
+        $this->ticketFirstname = $firstname;
+    }
+
+    public function setLastname($lastname) {
+        $this->ticketLastname = $lastname;
+    }
+
+    public function setStatus($status) {
+        if($status != "pending" || $status != "resolved" || $status != "unresolved" || $status != "inprogress") {
+            $status = "pending";
+        }
+        $this->ticketStatus = $status;
     }
 
 
@@ -123,6 +151,22 @@ class Ticket
         $this->ticketOtherIssue = $ticketOtherIssue;
     }
 
+    public function getStatus() {
+        return $this->ticketStatus;
+    }
+
+    public function getFirstname() {
+        return $this->ticketFirstname;
+    }
+
+    public function getLastname() {
+        return $this->ticketLastname;
+    }
+
+    public function getEmail() {
+        return $this->ticketEmail;
+    }
+
     /**
      * @return mixed
      */
@@ -156,7 +200,7 @@ class Ticket
         $str = '';
         $max = mb_strlen($keyspace, '8bit') - 1;
         for ($i = 0; $i < $length; ++$i) {
-            $str .= $keyspace[random_int(0, $max)];
+            $str .= $keyspace[rand(0, $max)];
         }
         return $str;
     }
