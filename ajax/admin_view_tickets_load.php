@@ -6,7 +6,12 @@
  * Time: 3:16 PM
  */
 require_once "../db/TicketPDO.php";
-    if($_POST)
+    
+	$data = TicketPDO::getAllTickets();
+	echo json_encode($data);
+	exit;
+	
+	/* if($_POST)
     {
         $data = TicketPDO::getAllTickets();
         echo json_encode($data);
@@ -16,4 +21,4 @@ require_once "../db/TicketPDO.php";
     {
         echo json_encode("error");
         exit;
-    }
+    } */
