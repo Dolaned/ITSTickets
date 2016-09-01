@@ -6,7 +6,7 @@
  * Date: 6/08/2016
  * Time: 4:13 PM
  */
-class SqliteHandler extends SQLLitePDO{
+class SqliteHandler{
 
     private $handler;
     private $dbName = "identifier.sqlite";
@@ -18,8 +18,7 @@ class SqliteHandler extends SQLLitePDO{
      * */
     function __construct()
     {
-        parent::__construct($this->dbName);
-        $this->handler = new SQLLitePDO($this->dbName);
+        $this->handler = new PDO('sqlite:'.$this->dbName);
         $this->handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     }
@@ -32,8 +31,8 @@ class SqliteHandler extends SQLLitePDO{
         try{
             $userSql = 'INSERT INTO tbl_user_info (firstname, lastname, email)
               VALUES (:firstname, :lastname:, :email)';
-            $ticketSql = 'INSERT INTO tbl_tickets (ticketid,userid, os, softwareissue,otherissue, ticketdate)
-              VALUES (:ticketid,:userid, :os, :softwareIssue, :otherissue, :ticketdate)';
+            $ticketSql = 'INSERT INTO tbl_tickets (subject,ticketid,userid, os, softwareissue,otherissue, ticketdate)
+              VALUES (:subject,:ticketid,:userid, :os, :softwareIssue, :otherissue, :ticketdate)';
 
             $stmt = $this->handler->prepare($userSql);
 
@@ -55,7 +54,8 @@ class SqliteHandler extends SQLLitePDO{
                 $stmt2->bindParam(':os',$ticket->getOperatingSystem());
                 $stmt2->bindParam(':softwareissue', $ticket->getSoftwareIssue());
                 $stmt2->bindParam(':otherissue', $ticket->getTicketOtherIssue());
-                $stmt2->bindParam('ticketdate',$ticket->getTicketDate());
+                $stmt2->bindParam(':ticketdate',$ticket->getTicketDate());
+                $stmt->bindParam(':subject', $ticket->getTicketSubject());
 
                 if($stmt2->execute()){
                     echo json_encode(array("Type" => "Success", "Message" => $ticket->getTicketId()), JSON_PRETTY_PRINT);
@@ -86,7 +86,7 @@ class SqliteHandler extends SQLLitePDO{
 
     }
 
-    function updateTicket($uid, $_POST){
+    function updateTicket($uid, $post){
 
     }
 }
