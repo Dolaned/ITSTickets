@@ -157,7 +157,7 @@ class TicketPDO
             $sql = $instance->db->prepare($find);
             $sql->bindParam(':ticketID', $tid, PDO::PARAM_STR);
             $sql->execute();
-            return "";
+            return "Successfuly deleted";
         } catch (PDOException $e) {
             // Print PDOException message
             return $e->getMessage();

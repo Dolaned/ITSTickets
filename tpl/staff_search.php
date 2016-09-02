@@ -1,9 +1,9 @@
 <main>
     <h1 class="page-title">Ticket Search</h1>
     <div class="content">
-        <form>
+        <form role="form" id="searchForm">
             <label for="ticket">Search by Ticket ID:</label>
-            <input id="ticket" name="ticket" type="text" placeholder="Ticket ID" />
+            <input id="ticketID" name="ticketID" type="text" placeholder="Ticket ID" />
             <hr />
 
             <label for="email">Search by Email Address:</label>
@@ -22,7 +22,7 @@
 
 <main>
     <h1 class="page-title">Search results for: Nothing</h1>
-    <div class="content">
+    <div class="content content2">
         <div class="table">
             <div class="head">
                 <div>Student</div>
@@ -53,3 +53,38 @@
 </main>
 
 <?php require_once('../tpl/staff_footer.php'); ?>
+
+<script>
+
+	$(document).on('submit', '#searchForm', function()
+	{
+		//var data = $(this).serialize();
+		ticket = document.getElementById("ticketID").innerHTML;
+		$.ajax({
+			type : 'POST',
+			url  : '../ajax/ticket_search.php',
+			data : ticket,
+			success :  function(data)
+			{
+				$('#searchForm').trigger("reset");
+				if(data != "error") {
+					// redirect to new ticket
+					console.log(data);
+				}
+				else {
+					// Get rid of the block of code below if you don't want the form to disappear after ticket submission and
+					// uncomment the block below this
+					$("#searchForm").fadeOut(250).hide(function()
+					{
+						$("#searchForm").fadeIn(250).show(function()
+						{
+							$(".content2").html('<p>An error occurred. Please try again.</p>');
+						});
+					});
+				}
+			}
+		});
+		return false;
+	});
+
+</script>
