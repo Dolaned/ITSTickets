@@ -1,21 +1,9 @@
 <main>
     <h1 class="page-title">Ticket Search</h1>
     <div class="content">
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <form role="form" id="searchForm">
-            <label for="ticket">Search by Ticket ID:</label>
-            <input id="ticketID" name="ticketID" type="text" placeholder="Ticket ID" />
-=======
-        <form id="search">
+        <form id="searchForm">
             <label for="ticket">Search by Ticket ID:</label>
             <input id="ticket" name="id" type="text" placeholder="Ticket ID" />
->>>>>>> refs/remotes/origin/nicholas
-=======
-        <form id="search">
-            <label for="ticket">Search by Ticket ID:</label>
-            <input id="ticket" name="id" type="text" placeholder="Ticket ID" />
->>>>>>> refs/remotes/origin/nicholas
             <hr />
             <label for="email">Search by Email Address:</label>
             <input id="email" name="email" type="email" placeholder="Email Address" />
@@ -44,98 +32,85 @@
 </main>
 
 <main>
-    <h1 class="page-title">Search results for: Nothing</h1>
+    <h1 class="page-title" id="tableTitle"></h1>
     <div class="content">
         <div class="table">
             <div class="head">
-                <div>Student</div>
+                <div>TicketID</div>
+                <div>Student Name</div>
+                <div>Ticket Submission Date</div>
                 <div>Email Address</div>
-            </div>
-            <div class="body">
-                <div>Ayyy</div>
-                <div>Ayyy</div>
-            </div>
-            <div class="body">
-                <div>Ayy boi</div>
-                <div>Here come dat boi</div>
-            </div>
-            <div class="body">
-                <div>Ayy boi</div>
-                <div>Here come dat boi</div>
-            </div>
-            <div class="body">
-                <div>Ayy boi</div>
-                <div>Here come dat boi</div>
-            </div>
-            <div class="body">
-                <div>Ayy boi</div>
-                <div>Here come dat boi</div>
+                <div>Ticket Status</div>
             </div>
         </div>
     </div>
 </main>
 
 <?php require_once('../tpl/staff_footer.php'); ?>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 <script>
+	$(document).ready(function() {
+        $("#searchForm").validate({
+            rules: {
+                id: {
+                    //digits: true,
+                    nowhitespace: true
+                },
+                email: {
+                    email: true
+                },
+            },
+        });
+    });
 
-	$(document).on('submit', '#searchForm', function()
-	{
-		//var data = $(this).serialize();
-		ticket = document.getElementById("ticketID").innerHTML;
-		$.ajax({
-			type : 'POST',
-			url  : '../ajax/ticket_search.php',
-			data : ticket,
-			success :  function(data)
-			{
-				$('#searchForm').trigger("reset");
-				if(data != "error") {
-					// redirect to new ticket
-					console.log(data);
-				}
-				else {
-					// Get rid of the block of code below if you don't want the form to disappear after ticket submission and
-					// uncomment the block below this
-					$("#searchForm").fadeOut(250).hide(function()
-					{
-						$("#searchForm").fadeIn(250).show(function()
-						{
-							$(".content2").html('<p>An error occurred. Please try again.</p>');
-						});
-					});
-				}
-			}
-		});
-		return false;
-	});
-
-=======
-=======
->>>>>>> refs/remotes/origin/nicholas
-<script>
     $(document).ready(function() {
-        $(document).on('submit', '#search', function(e)
+        $(document).on('submit', '#searchForm', function(e)
         {
-            e.preventDefault();
+			id = document.getElementById('ticket').value;
+			email = document.getElementById('email').value;
+			
+			if (id == '' && email == '')
+			{
+				alert("Search parameter cannot be empty");
+				return false;
+			}
 
             $.ajax({
                 type : 'POST',
-                dataType : 'JSON',
                 url : '../ajax/admin_ticket_search.php',
-                data : $("#search").serialize(),
+                data : $("#searchForm").serialize(),
+				dataType: 'json',
                 success : function(data) {
-                    console.log(data);
+					if (data == false)
+					{
+						alert("No such record exists");
+						return false;
+					}
+					insertData(data);
                 }
             });
-
             return false;
         });
     });
-<<<<<<< HEAD
->>>>>>> refs/remotes/origin/nicholas
-=======
->>>>>>> refs/remotes/origin/nicholas
+	
+	function insertData(jsonInfo)
+	{	
+		var ticketID = document.getElementById('ticket').value;
+		var email = document.getElementById('email').value;
+		
+		if (ticketID == '')
+		{
+			$.each(jsonInfo, function(index, element) {
+				document.getElementById('tableTitle').innerHTML = 'Search results for: '+element.email+'';
+				var content = '<div class="body"><div>'+element.ticketid+'</div><div>'+element.firstName+' '+element.lastName+'</div><div>'+element.date+'</div><div>'+element.email+'</div><div>'+element.status+'</div></div>';
+				$(content).insertAfter(".head");		
+			});
+		}
+		else
+		{
+			document.getElementById('tableTitle').innerHTML = 'Search results for: '+jsonInfo.ticketid+'';
+			var content = '<div class="body"><div>'+jsonInfo.ticketid+'</div><div>'+jsonInfo.firstName+' '+jsonInfo.lastName+'</div><div>'+jsonInfo.date+'</div><div>'+jsonInfo.email+'</div><div>'+jsonInfo.status+'</div></div>';
+			$(content).insertAfter(".head");
+		}
+	}
+	
 </script>
