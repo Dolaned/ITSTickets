@@ -16,7 +16,8 @@ if(isset($_GET['page'])) {
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../animate.css">
+    
+	<link rel="stylesheet" href="../animate.css">
     <link href="../admin.css" rel="stylesheet" />
 </head>
 
