@@ -2,9 +2,15 @@
     <h1 class="page-title">Ticket Search</h1>
     <div class="content">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <form role="form" id="searchForm">
             <label for="ticket">Search by Ticket ID:</label>
             <input id="ticketID" name="ticketID" type="text" placeholder="Ticket ID" />
+=======
+        <form id="search">
+            <label for="ticket">Search by Ticket ID:</label>
+            <input id="ticket" name="id" type="text" placeholder="Ticket ID" />
+>>>>>>> refs/remotes/origin/nicholas
 =======
         <form id="search">
             <label for="ticket">Search by Ticket ID:</label>
@@ -39,7 +45,7 @@
 
 <main>
     <h1 class="page-title">Search results for: Nothing</h1>
-    <div class="content content2">
+    <div class="content">
         <div class="table">
             <div class="head">
                 <div>Student</div>
@@ -70,6 +76,7 @@
 </main>
 
 <?php require_once('../tpl/staff_footer.php'); ?>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 <script>
@@ -106,6 +113,8 @@
 	});
 
 =======
+=======
+>>>>>>> refs/remotes/origin/nicholas
 <script>
     $(document).ready(function() {
         $(document).on('submit', '#search', function(e)
@@ -125,5 +134,8 @@
             return false;
         });
     });
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/nicholas
+=======
 >>>>>>> refs/remotes/origin/nicholas
 </script>
