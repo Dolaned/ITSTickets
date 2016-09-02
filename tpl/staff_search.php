@@ -1,20 +1,37 @@
 <main>
     <h1 class="page-title">Ticket Search</h1>
     <div class="content">
+<<<<<<< HEAD
         <form role="form" id="searchForm">
             <label for="ticket">Search by Ticket ID:</label>
             <input id="ticketID" name="ticketID" type="text" placeholder="Ticket ID" />
+=======
+        <form id="search">
+            <label for="ticket">Search by Ticket ID:</label>
+            <input id="ticket" name="id" type="text" placeholder="Ticket ID" />
+>>>>>>> refs/remotes/origin/nicholas
             <hr />
-
             <label for="email">Search by Email Address:</label>
             <input id="email" name="email" type="email" placeholder="Email Address" />
+
+            <div class="split">
+                <div>
+                    <label for="sortBy">Sort By:</label>
+                    <select id="sortBy" name="orderBy">
+                        <option value="9" selected>Ticket Status</option>
+                        <option value="10">Date</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="ascDesc">Order:</label>
+                    <select id="ascDesc" name="ascdesc">
+                        <option value="1" selected>Ascending</option>
+                        <option value="0">Descending</option>
+                    </select>
+                </div>
+            </div>
             <hr />
-            <p>
-                Sorting options will go here
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium atque et harum impedit natus, nostrum obcaecati quia quisquam similique soluta! Aperiam blanditiis, corporis distinctio impedit perferendis quasi reiciendis repudiandae sunt!
-            </p>
+
             <input type="submit" value="Search" class="btn" />
         </form>
     </div>
@@ -53,6 +70,7 @@
 </main>
 
 <?php require_once('../tpl/staff_footer.php'); ?>
+<<<<<<< HEAD
 
 <script>
 
@@ -87,4 +105,25 @@
 		return false;
 	});
 
+=======
+<script>
+    $(document).ready(function() {
+        $(document).on('submit', '#search', function(e)
+        {
+            e.preventDefault();
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'JSON',
+                url : '../ajax/admin_ticket_search.php',
+                data : $("#search").serialize(),
+                success : function(data) {
+                    console.log(data);
+                }
+            });
+
+            return false;
+        });
+    });
+>>>>>>> refs/remotes/origin/nicholas
 </script>

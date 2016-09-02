@@ -44,7 +44,7 @@
         <div class="col-md-4 animated fadeInRight">
             <h1>Ticket Search</h1>
             <form id="ticketSearch" method="POST">
-                <input type="text" name="ticketid" class="form-control" placeholder="Search by: Ticket ID" /><hr/>
+                <input type="text" name="ticketid" id="ticketid" class="form-control" placeholder="Search by: Ticket ID" /><hr/>
                 <p>
                     <input type="submit" value="Search" class="btn btn-danger pull-right" />
                 </p>
@@ -53,3 +53,36 @@
     </div>
 </div>
 <?php require_once('tpl/footer.php'); ?>
+
+<script>
+    $(document).ready(function() {
+        $(document).on('submit', '#ticketSearch', function(e){
+            e.preventDefault();
+
+            var d = {
+                id: $("#ticketid").val()
+            };
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'JSON',
+                url: 'ajax/ticket_search.php',
+                data : d,
+                success: function(data){
+                    if(data != "error") {
+                        // redirect to new ticket
+                        window.location = "?page=view#"+d['id'];
+                    }
+                    else
+                    {
+                        alert("An error occurred. Please try again.");
+                    }
+                }
+            });
+
+
+
+        });
+    });
+</script>
+
