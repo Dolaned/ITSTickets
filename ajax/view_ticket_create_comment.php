@@ -8,7 +8,7 @@ if($_POST)
     $ticketid = $_POST['id'];
     $name = $_POST['name'];
     $text = $_POST['text'];
-    $type = "student";
+    $type = false;
 
     $pdo = CommentPDO::getInstance();
 

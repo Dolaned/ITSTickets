@@ -29,10 +29,14 @@ class Comment
     }
 
     public function setType($type) {
-        if($type != "student" || $type != "staff") {
-            $type = "student";
+        $t = "";
+        if($type == true) {
+            $t = "staff";
         }
-        $this->type = $type;
+        else {
+            $t = "student";
+        }
+        $this->type = $t;
     }
 
 

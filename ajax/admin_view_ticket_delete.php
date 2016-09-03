@@ -6,15 +6,15 @@
  * Time: 3:34 PM
  */
 require_once "../db/TicketPDO.php";
-    if($_POST)
-    {
-        $ID = $_POST['id'];
-        $success = TicketPDO::deleteTicket($ID);
-        echo $success;
-        exit;
-    }
-    else
-    {
-        echo "error";
-        exit;
-    }
+if($_POST)
+{
+    $ID = $_POST['id'];
+    $success = TicketPDO::deleteTicket($ID);
+    echo $success;
+    exit;
+}
+else
+{
+    echo "error";
+    exit;
+}

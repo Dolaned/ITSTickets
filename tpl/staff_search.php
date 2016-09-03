@@ -1,7 +1,7 @@
 <main>
     <h1 class="page-title">Ticket Search</h1>
     <div class="content">
-        <form id="search">
+        <form id="searchForm">
             <label for="ticket">Search by Ticket ID:</label>
             <input id="ticket" name="id" type="text" placeholder="Ticket ID" />
             <hr />
@@ -12,8 +12,8 @@
                 <div>
                     <label for="sortBy">Sort By:</label>
                     <select id="sortBy" name="orderBy">
-                        <option value="9" selected>Ticket Status</option>
-                        <option value="10">Date</option>
+                        <option value="1" selected>Ticket Status</option>
+                        <option value="0">Date</option>
                     </select>
                 </div>
                 <div>
@@ -31,56 +31,97 @@
     </div>
 </main>
 
-<main>
-    <h1 class="page-title">Search results for: Nothing</h1>
+<main id="searchResults" style="display:none;">
+    <h1 class="page-title" id="tableTitle"></h1>
     <div class="content">
-        <div class="table">
-            <div class="head">
-                <div>Student</div>
-                <div>Email Address</div>
-            </div>
-            <div class="body">
-                <div>Ayyy</div>
-                <div>Ayyy</div>
-            </div>
-            <div class="body">
-                <div>Ayy boi</div>
-                <div>Here come dat boi</div>
-            </div>
-            <div class="body">
-                <div>Ayy boi</div>
-                <div>Here come dat boi</div>
-            </div>
-            <div class="body">
-                <div>Ayy boi</div>
-                <div>Here come dat boi</div>
-            </div>
-            <div class="body">
-                <div>Ayy boi</div>
-                <div>Here come dat boi</div>
-            </div>
-        </div>
+        <div class="table"></div>
     </div>
 </main>
 
 <?php require_once('../tpl/staff_footer.php'); ?>
 <script>
     $(document).ready(function() {
-        $(document).on('submit', '#search', function(e)
+        $(document).on('submit', '#searchForm', function(e)
         {
-            e.preventDefault();
+            var id = document.getElementById('ticket').value;
+            var email = document.getElementById('email').value;
 
+            if (id == '' && email == '')
+            {
+                alert("Search parameter cannot be empty");
+                return false;
+            }
             $.ajax({
                 type : 'POST',
-                dataType : 'JSON',
                 url : '../ajax/admin_ticket_search.php',
-                data : $("#search").serialize(),
+                data : $("#searchForm").serialize(),
+                dataType: 'json',
                 success : function(data) {
-                    console.log(data);
+                    if (data == false)
+                    {
+                        alert("No such record exists");
+                        return false;
+                    }
+                    $("#searchResults").show();
+                    $(".table").html('<div class="head"><div>TicketID</div><div>Student Name</div><div>Ticket Submission Date</div><div>Email Address</div><div>Ticket Status</div></div>');
+                    insertData(data);
                 }
             });
-
             return false;
         });
     });
+
+    function insertData(jsonInfo)
+    {
+        var ticketID = document.getElementById('ticket').value;
+        var email = document.getElementById('email').value;
+
+        if (ticketID == '')
+        {
+            $.each(jsonInfo, function(index, element) {
+                var statusType = "";
+                switch (element.status) {
+                    case "pending":
+                        statusType = "<span class='status'>Pending</span>";
+                        break;
+                    case "inprogress":
+                        statusType = "<span class='status pending'>In Progress</span>";
+                        break;
+                    case "unresolved":
+                        statusType = "<span class='status closed'>Unresolved</span>";
+                        break;
+                    case "resolved":
+                        statusType = "<span class='status resolved'>Resolved</span>";
+                        break;
+                }
+
+                document.getElementById('tableTitle').innerHTML = 'Search results for: '+element.email+'';
+                var content = '<div class="body"><div>'+element.ticketid+'</div><div>'+element.firstName+' '+element.lastName+'</div><div>'+formatTimestamp(element.date * 1000)+'</div><div>'+element.email+'</div><div>'+statusType+'</div></div>';
+                $(content).insertAfter(".head");
+            });
+        }
+        else
+        {
+            var statusType = "";
+            switch (jsonInfo.status) {
+                case "pending":
+                    statusType = "<span class='status'>Pending</span>";
+                    break;
+                case "inprogress":
+                    statusType = "<span class='status pending'>In Progress</span>";
+                    break;
+                case "unresolved":
+                    statusType = "<span class='status closed'>Unresolved</span>";
+                    break;
+                case "resolved":
+                    statusType = "<span class='status resolved'>Resolved</span>";
+                    break;
+            }
+
+            document.getElementById('tableTitle').innerHTML = 'Search results for: '+jsonInfo.ticketid+'';
+            var content = '<div class="body"><div>'+jsonInfo.ticketid+'</div><div>'+jsonInfo.firstName+' '+jsonInfo.lastName+'</div><div>'+formatTimestamp(jsonInfo.date * 1000)+'</div><div>'+jsonInfo.email+'</div><div>'+statusType+'</div></div>';
+            $(content).insertAfter(".head");
+        }
+    }
+
 </script>

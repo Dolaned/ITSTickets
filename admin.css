@@ -12,6 +12,7 @@ body {
 
 * {
     box-sizing:border-box;
+    vertical-align:top;
 }
 
 a {
@@ -300,7 +301,8 @@ label {
 
 .status {
     padding:7px 12px;
-    border:1px solid transparent;
+    border:1px solid rgba(0,0,0,0.1);
+    background-color:#fff;
     border-radius:4px;
     display:block;
     text-align:center;
@@ -324,65 +326,6 @@ label {
 
 
 
-
-
-
-#overlay {
-    position:fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    background-color:rgba(0,0,0,0.8);
-    z-index:100;
-    opacity:0;
-    pointer-events:none;
-    visibility:hidden;
-    transition:opacity 0.25s ease, visibility 0.25s ease;
-}
-
-#overlay.show {
-    opacity:1;
-    visibility:visible;
-    pointer-events:inherit;
-}
-
-#overlay .container {
-    margin:auto;
-    width:600px;
-    position:absolute;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    max-height:500px;
-}
-
-#overlay .container > h1 {
-    color:#ffffff;
-    margin:0;
-    padding:20px 20px 10px 20px;
-    opacity:0;
-    transform:scale(2.75);
-    transition:opacity 0.25s ease, transform 0.5s ease;
-    text-align:center;
-}
-
-#overlay.show .container > h1 {
-    opacity:1;
-    transform:scale(1);
-}
-
-#overlay .container > .content {
-    opacity:0;
-    transform:scale(0.75);
-    transition:opacity 0.25s ease, transform 0.5s ease;
-}
-
-#overlay.show .container > .content {
-    opacity:1;
-    transform:scale(1);
-}
 
 
 .split {
