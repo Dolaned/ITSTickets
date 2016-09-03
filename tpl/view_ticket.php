@@ -26,7 +26,7 @@
             </div>
             <div id="appender"></div>
             <hr/>
-            <div class="row">
+            <div class="row replyConvo">
                 <div class="col-md-1"></div>
                 <div class="col-md-9">
                     <div class="panel panel-info reply-right">
@@ -115,15 +115,19 @@
 
                             if(data['status'] == "pending") {
                                 $("#ticketStatus").html('<div class="alert alert-warning">This issue has not yet been resolved.</div>');
+                                $('.replyConvo').show();
                             }
                             else if(data['status'] == "resolved") {
                                 $("#ticketStatus").html('<div class="alert alert-success">This issue has been resolved.</div>');
+                                $('.replyConvo').hide();
                             }
                             else if(data['status'] == "unresolved") {
                                 $("#ticketStatus").html('<div class="alert alert-danger">This issue was set as unresolved.</div>');
+                                $('.replyConvo').show();
                             }
                             else if(data['status'] == "inprogress") {
                                 $("#ticketStatus").html('<div class="alert alert-info">This issue is in progress of being resolved.</div>');
+                                $('.replyConvo').show();
                             }
 
                             $.ajax({
