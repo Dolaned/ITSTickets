@@ -46,5 +46,14 @@
         $(window).scroll(function() {
             calcTop();
         });
+
+        $('.hamburger').on('click', function() {
+            if($("#sidebar").hasClass("show")) {
+                $("#sidebar").removeClass("show");
+            }
+            else {
+                $("#sidebar").addClass("show");
+            }
+        });
     })
 </script>

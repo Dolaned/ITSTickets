@@ -127,6 +127,7 @@ header .section-title h1 {
     color:#ffffff;
     padding-top:20px;
     overflow-y:auto;
+    transition:left 0.25s ease, opacity 0.35s ease;
 }
 
 #sidebar a {
@@ -341,4 +342,78 @@ label {
 
 .split > div +  div {
     padding-left:10px;
+}
+
+
+.hamburger {
+    position:absolute;
+    top:7px;
+    cursor:pointer;
+    left:15px;
+    font-size:2.25em;
+    display:none;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    #sidebar {
+        left:-300px;
+        opacity:0;
+    }
+
+    #sidebar.show {
+        left:0;
+        opacity:1;
+    }
+
+    .hamburger {
+        display:block;
+    }
+
+    main {
+        margin-left:0px;
+    }
+
+    .content {
+        overflow-x:auto;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .section-title {
+        display:none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .split {
+        display: block;
+    }
+
+    .split > div + div {
+        padding-left: 0px;
+    }
+
+    h1 {
+        font-size:1.5em;
+    }
+
+    .table {
+        display:block;
+    }
+
+    .table .body {
+        display:block;
+        border-bottom:1px solid rgba(0,0,0,0.5);
+        padding:20px 0px;
+    }
+
+    .table .body > div {
+        display:block;
+    }
+
+    .table .body > div:nth-child(2n) {
+        background-color:rgba(0,0,0,0.025);
+    }
 }

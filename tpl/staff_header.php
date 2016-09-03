@@ -29,6 +29,7 @@ if(isset($_GET['page'])) {
             <span></span>
         </div></a>
         <div class="section-title"><h1></h1></div>
+        <span class="material-icons hamburger">dehaze</span>
     </div>
 </header>
 
