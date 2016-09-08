@@ -25,26 +25,20 @@
         <div class="col-md-4 animated fadeIn">
             <h1>Recent FAQs</h1>
             <p>
-                <i>Got a question? Ask other students!</i>
-            </p><hr/>
-            <p>
-                <b>I can't find my Pokemon!</b>
-                <br/>Simple! Stop playing.
-            </p><hr/>
-            <p>
-                <b>I ran out of toilet paper!</b>
-                <br/>Tough luck.
-            </p><hr/>
-            <p>
-                <b>I can't find a study space!</b>
-                <br/>We're a university of technology, not a university of study spaces.
+                Some problems may have a solution on our Frequently Asked Questions page.
             </p>
-            <p><a class="btn btn-danger" href="#">View More...</a></p>
+            <ul>
+                <li>When can I contact ITS?</li>
+                <li>Where are walk-in locations at?</li>
+                <li>What if I have a problem after-hours?</li>
+            </ul>
+            <p><a class="btn btn-danger" href="?page=faq">View FAQs...</a></p>
         </div>
         <div class="col-md-4 animated fadeInRight">
             <h1>Ticket Search</h1>
+            <p>View the progress of your ticket by entering the associated Ticket ID:</p>
             <form id="ticketSearch" method="POST">
-                <input type="text" name="ticketid" class="form-control" placeholder="Search by: Ticket ID" /><hr/>
+                <input type="text" name="ticketid" id="ticketid" class="form-control" placeholder="Search by: Ticket ID" /><hr/>
                 <p>
                     <input type="submit" value="Search" class="btn btn-danger pull-right" />
                 </p>
@@ -53,3 +47,36 @@
     </div>
 </div>
 <?php require_once('tpl/footer.php'); ?>
+
+<script>
+    $(document).ready(function() {
+        $(document).on('submit', '#ticketSearch', function(e){
+            e.preventDefault();
+
+            var d = {
+                id: $("#ticketid").val()
+            };
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'JSON',
+                url: 'ajax/ticket_search.php',
+                data : d,
+                success: function(data){
+                    if(data != "error") {
+                        // redirect to new ticket
+                        window.location = "?page=view#"+d['id'];
+                    }
+                    else
+                    {
+                        alert("An error occurred. Please try again.");
+                    }
+                }
+            });
+
+
+
+        });
+    });
+</script>
+

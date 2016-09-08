@@ -21,15 +21,19 @@
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body">
-                            <p>
-                                <b>Phone support – from 1 February to 27 November 2016</b><br/>
-                                Monday to Friday – 8:00 am to 8:00 pm<br/>
-                                Saturday – 8:30 am to 4:30 pm<br/>
-                                <b>Switchboard</b><br/>
-                                Monday to Friday - 8:30 am to 5:30 pm<br/>
-                                <b>AV loans</b><br/>
-                                Monday to Friday – 9:00 am to 5:00 pm
-                            </p>
+                            <p><b>Phone support – from 1 February to 27 November 2016</b></p>
+                            <ul>
+                                <li>Monday to Friday – 8:00 am to 8:00 pm</li>
+                                <li>Saturday – 8:30 am to 4:30 pm</li>
+                            </ul>
+                            <p><b>Switchboard</b></p>
+                            <ul>
+                                <li>Monday to Friday - 8:30 am to 5:30 pm</li>
+                            </ul>
+                            <p><b>AV loans</b></p>
+                            <ul>
+                                <li>Monday to Friday – 9:00 am to 5:00 pm</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -42,14 +46,14 @@
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <p>
-                                Swanston Academic Building (SAB) – Building 80 Level 3 - Monday to Friday 8.00 am to 8.00 pm<br/>
-                                Swanston Academic Building (SAB) – Building 80 Level 3 - Saturday 8.30 am to 4.30 pm<br/>
-                                Bundoora Library - Monday to Friday - 9.00 am to 5.00 pm<br/>
-                                Brunswick Library - Monday to Friday - 9.00 am to 5.00 pm<br/>
-                                Swanston Library - Monday to Friday - 9.00 am to 5.00 pm<br/>
-                                Building 28, Level 3 Lab – Monday to Friday – 9.00 am to 5.00 pm
-                            </p>
+                            <ul>
+                                <li>Swanston Academic Building (SAB) – Building 80 Level 3 - Monday to Friday 8.00 am to 8.00 pm</li>
+                                <li>Swanston Academic Building (SAB) – Building 80 Level 3 - Saturday 8.30 am to 4.30 pm</li>
+                                <li>Bundoora Library - Monday to Friday - 9.00 am to 5.00 pm</li>
+                                <li>Brunswick Library - Monday to Friday - 9.00 am to 5.00 pm</li>
+                                <li>Swanston Library - Monday to Friday - 9.00 am to 5.00 pm</li>
+                                <li>Building 28, Level 3 Lab – Monday to Friday – 9.00 am to 5.00 pm</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

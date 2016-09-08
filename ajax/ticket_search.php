@@ -16,13 +16,8 @@ if($_POST)
         echo json_encode($data);
         exit;
     }
-    else {
-        echo json_encode("error");
-        exit;
-    }
-
 
 } else {
     echo json_encode("error");
     exit;
-}
+} 

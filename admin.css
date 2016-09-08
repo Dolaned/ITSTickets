@@ -12,6 +12,7 @@ body {
 
 * {
     box-sizing:border-box;
+    vertical-align:top;
 }
 
 a {
@@ -126,6 +127,7 @@ header .section-title h1 {
     color:#ffffff;
     padding-top:20px;
     overflow-y:auto;
+    transition:left 0.25s ease, opacity 0.35s ease;
 }
 
 #sidebar a {
@@ -177,7 +179,7 @@ main {
 
 
 
-input, textarea {
+input, textarea, select {
     padding:5px 10px;
     border-radius:3px;
     border:1px solid rgba(0,0,0,0.2);
@@ -185,9 +187,10 @@ input, textarea {
     transition:box-shadow 0.5s ease;
     width:100%;
     font-family:'Roboto';
+    display:block;
 }
 
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
     box-shadow:0px 0px 5px #3aaae1;
     border:1px solid transparent;
 }
@@ -299,7 +302,8 @@ label {
 
 .status {
     padding:7px 12px;
-    border:1px solid transparent;
+    border:1px solid rgba(0,0,0,0.1);
+    background-color:#fff;
     border-radius:4px;
     display:block;
     text-align:center;
@@ -325,60 +329,91 @@ label {
 
 
 
-
-#overlay {
-    position:fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    background-color:rgba(0,0,0,0.8);
-    z-index:100;
-    opacity:0;
-    pointer-events:none;
-    visibility:hidden;
-    transition:opacity 0.25s ease, visibility 0.25s ease;
+.split {
+    display:flex;
+    flex-direction: row;
+    margin-top:10px;
 }
 
-#overlay.show {
-    opacity:1;
-    visibility:visible;
-    pointer-events:inherit;
+.split > div {
+    flex-grow:1;
+    flex-shrink:1;
+    flex-wrap:wrap;}
+
+.split > div +  div {
+    padding-left:10px;
 }
 
-#overlay .container {
-    margin:auto;
-    width:600px;
+
+.hamburger {
     position:absolute;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    max-height:500px;
+    top:7px;
+    cursor:pointer;
+    left:15px;
+    font-size:2.25em;
+    display:none;
 }
 
-#overlay .container > h1 {
-    color:#ffffff;
-    margin:0;
-    padding:20px 20px 10px 20px;
-    opacity:0;
-    transform:scale(2.75);
-    transition:opacity 0.25s ease, transform 0.5s ease;
-    text-align:center;
+
+
+@media screen and (max-width: 1024px) {
+    #sidebar {
+        left:-300px;
+        opacity:0;
+    }
+
+    #sidebar.show {
+        left:0;
+        opacity:1;
+    }
+
+    .hamburger {
+        display:block;
+    }
+
+    main {
+        margin-left:0px;
+    }
+
+    .content {
+        overflow-x:auto;
+    }
 }
 
-#overlay.show .container > h1 {
-    opacity:1;
-    transform:scale(1);
+@media screen and (max-width: 700px) {
+    .section-title {
+        display:none;
+    }
 }
 
-#overlay .container > .content {
-    opacity:0;
-    transform:scale(0.75);
-    transition:opacity 0.25s ease, transform 0.5s ease;
-}
+@media screen and (max-width: 600px) {
+    .split {
+        display: block;
+    }
 
-#overlay.show .container > .content {
-    opacity:1;
-    transform:scale(1);
+    .split > div + div {
+        padding-left: 0px;
+    }
+
+    h1 {
+        font-size:1.5em;
+    }
+
+    .table {
+        display:block;
+    }
+
+    .table .body {
+        display:block;
+        border-bottom:1px solid rgba(0,0,0,0.5);
+        padding:20px 0px;
+    }
+
+    .table .body > div {
+        display:block;
+    }
+
+    .table .body > div:nth-child(2n) {
+        background-color:rgba(0,0,0,0.025);
+    }
 }
